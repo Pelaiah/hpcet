@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 145 36% 7%;
+    --foreground: 120 20% 97%;
+    --card: 145 30% 10%;
+    --card-foreground: 120 20% 97%;
+    --popover: 145 32% 9%;
+    --popover-foreground: 120 20% 97%;
+    --primary: 99 78% 50%;
+    --primary-foreground: 145 45% 7%;
+    --secondary: 144 22% 16%;
+    --secondary-foreground: 120 18% 94%;
+    --muted: 144 20% 15%;
+    --muted-foreground: 132 14% 68%;
+    --accent: 38 92% 52%;
+    --accent-foreground: 145 45% 7%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 140 18% 22%;
+    --input: 140 20% 18%;
+    --ring: 99 78% 50%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/30 selection:text-white;
+  }
+}
+
+.glass-panel {
+  background: rgba(15, 29, 20, 0.58);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 36px -12px rgba(0, 0, 0, 0.55);
+}
+
+.glass-panel-soft {
+  background: rgba(20, 38, 25, 0.48);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.glass-hero-green {
+  background: linear-gradient(135deg, rgba(72, 168, 24, 0.72) 0%, rgba(28, 72, 20, 0.78) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(134, 239, 86, 0.35);
+  box-shadow: 0 16px 40px -14px rgba(52, 168, 20, 0.35);
+}
+
+.btn-emerald-gradient {
+  background: linear-gradient(180deg, #6CE429 0%, #3E9F14 100%);
+  color: #ffffff;
+  border: 1px solid rgba(163, 247, 108, 0.45);
+  box-shadow: 0 8px 24px -6px rgba(82, 204, 24, 0.45);
+}
+
+.btn-emerald-gradient:hover {
+  filter: brightness(1.06);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

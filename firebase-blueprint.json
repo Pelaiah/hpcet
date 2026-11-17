@@ -1,0 +1,98 @@
+
+{
+  "entities": {
+    "OutreachVisit": {
+      "title": "Outreach Visit",
+      "description": "A record of an outreach contact with a peer, including commodities distributed and clinical services offered.",
+      "type": "object",
+      "properties": {
+        "peerEducatorId": { "type": "string", "description": "UID of the peer educator who conducted the visit" },
+        "peerEducatorName": { "type": "string", "description": "Display name of the peer educator" },
+        "uin": { "type": "string", "description": "Unique identifier of the peer" },
+        "visitDate": { "type": "string", "format": "date", "description": "Date the visit occurred" },
+        "riskLevel": { "type": "string", "enum": ["High", "Medium", "Low", "Unknown"] },
+        "isRegisteredAtClinic": { "type": "boolean" },
+        "commodities": {
+          "type": "object",
+          "properties": {
+            "mc": { "type": "number" },
+            "fc": { "type": "number" },
+            "lube": { "type": "number" },
+            "hivstDistributed": { "type": "number" },
+            "hivstNegative": { "type": "number" },
+            "hivstPositive": { "type": "number" },
+            "pregDistributed": { "type": "number" },
+            "pregNegative": { "type": "number" },
+            "pregPositive": { "type": "number" },
+            "padsReusable": { "type": "number" },
+            "padsDisposable": { "type": "number" }
+          }
+        },
+        "topicsDiscussed": { "type": "array", "items": { "type": "string" } },
+        "aiSummary": { "type": "string" },
+        "aiActions": { "type": "array", "items": { "type": "string" } },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uin", "visitDate", "riskLevel", "peerEducatorId"]
+    },
+    "HotspotProfile": {
+      "title": "Hotspot Profile",
+      "description": "Site-specific profiling data for a health hotspot.",
+      "type": "object",
+      "properties": {
+        "peerEducatorId": { "type": "string" },
+        "siteName": { "type": "string" },
+        "hotspotName": { "type": "string" },
+        "ward": { "type": "string" },
+        "area": { "type": "string" },
+        "cluster": { "type": "string" },
+        "profilingDate": { "type": "string", "format": "date" },
+        "microplanner": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "typology": { "type": "array", "items": { "type": "string" } },
+        "populationData": { "type": "object" },
+        "services": { "type": "object" },
+        "structural": { "type": "object" },
+        "aiAnalysis": { "type": "string" },
+        "aiRecommendations": { "type": "array", "items": { "type": "string" } },
+        "priorityLevel": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["hotspotName", "ward", "peerEducatorId", "timestamp"]
+    },
+    "PeerLocation": {
+      "title": "Peer Educator Live Location",
+      "description": "Live GPS broadcast shared by a peer educator with their supervisor.",
+      "type": "object",
+      "properties": {
+        "educatorId": { "type": "string" },
+        "educatorName": { "type": "string" },
+        "ward": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "accuracy": { "type": "number" },
+        "isSharing": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["educatorId", "educatorName", "lat", "lng", "isSharing", "updatedAt"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com"]
+  },
+  "firestore": {
+    "/outreachVisits/{visitId}": {
+      "schema": "OutreachVisit",
+      "description": "Collection of all outreach visits for tracking and stock management"
+    },
+    "/hotspotProfiles/{profileId}": {
+      "schema": "HotspotProfile",
+      "description": "Collection of site-specific profiling records"
+    },
+    "/peerLocations/{educatorId}": {
+      "schema": "PeerLocation",
+      "description": "Live Peer Educator location stream visible to CHM Supervisors"
+    }
+  }
+}
